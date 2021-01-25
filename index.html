@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Tour Arqueológico VR! • A-Frame</title>
+    <meta name="description" content="Tour Arqueologico VR! • A-Frame" />
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+
+    <script src="components/UI/mylink-redirect.js"></script>
+
+    <!-- Inicio Template de Botones para cambio de fondo-->
+    <script id="buttonSceneChange" type="text/html">
+      <a-entity class="button"
+          geometry="primitive: plane; height: 1.5; width: 1.5"
+          material="shader: flat; src: ${thumb}"
+          event-set__mouseenter="scale: 1.5 1.5 1.5"
+          event-set__mouseleave="scale: 1 1 1"
+
+          sound="on: click; src: #click-sound"
+
+          position= "${position}"
+
+          rotation= "${rotation}"
+
+          mylink-redirect = "href: ${url}"
+
+          text="value: ${title}; color: black; height: 5; width: 5; align: center; baseline: center"
+        ></a-entity>
+    </script>
+    <!-- Fin Template de Botones para cambio de fondo-->
+  </head>
+  <body>
+    <a-scene background="color: #FAFAFA">
+      <a-assets>
+        <a-asset-item
+          id="sectorE-obj"
+          src="https://cdn.glitch.com/be558953-ff3a-445c-9099-5f01f06ff4cd%2FsectorE.obj?v=1602278172746"
+        ></a-asset-item>
+        <img
+          id="sectorE-img"
+          src="https://cdn.glitch.com/be558953-ff3a-445c-9099-5f01f06ff4cd%2F1SectorE_obj.jpg?v=1604977627441"
+        />
+        <img
+          id="maincra-logo"
+          src="https://cdn.glitch.com/1ca489e0-1c30-40d6-9fec-bf5802b74cc4%2FMaincraLogo.jpg?v=1603933163912"
+        />
+        <img
+          id="button-frame"
+          src="https://cdn.glitch.com/be558953-ff3a-445c-9099-5f01f06ff4cd%2Fbutton_frame_00.png?v=1605384370256"
+        />
+      </a-assets>
+
+      
+      <a-entity
+        id="SectorE"
+        obj-model="obj: #sectorE-obj"
+        material="src: #sectorE-img"
+        position="0 5 0"
+        rotation="-90 0 0"
+      ></a-entity>
+      
+
+      <!-- Inicio Botones personalizados desde template -->
+      <a-entity
+        template="src: #buttonSceneChange"
+        data-thumb="#button-frame"
+        data-src="#city"
+        data-position="3.8 -1 2"
+        data-rotation="-45 0 0"
+        data-title="Excavacion \n 2"
+        data-url="excavacion2.html"
+      >
+      </a-entity>
+      
+      <a-entity
+        template="src: #buttonSceneChange"
+        data-thumb="#button-frame"
+        data-src="#city"
+        data-position="-2 -1 4"
+        data-rotation="-45 0 0"
+        data-title="Excavacion \n 3"
+        data-url="excavacion3.html"
+      >
+      </a-entity>
+
+      <a-entity
+        template="src: #buttonSceneChange"
+        data-thumb="#button-frame"
+        data-src="#city"
+        data-position="5 -1 6"
+        data-rotation="-45 0 0"
+        data-title="Excavacion \n 4"
+        data-url="excavacion4.html"
+      >
+      </a-entity>
+      <!-- Fin Botones personalizados desde template -->
+
+      <!-- Inicio Camara principal. -->
+      <!-- <a-entity camera look-controls="pointerLockEnabled: true"> -->
+      <a-entity
+        camera=""
+        wasd-controls=""
+        look-controls="pointerLockEnabled: true"
+        position="0 4 8"
+        rotation="0 0 0"
+      >
+        <!-- Inicio Cursor de la camara principal. -->
+        <a-cursor
+          id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__mouseenter="[object Object]"
+          event-set__mouseleave="[object Object]"
+          raycaster="objects: .button"
+          material=""
+          cursor=""
+          geometry=""
+          color="black"
+        ></a-cursor>
+        <!-- Fin Cursor de la camara principal. -->
+      </a-entity>
+      <!-- Fin Camara principal. -->
+      
+      <!-- Inicio Interaccion con mandos VR. -->
+      <a-entity
+        laser-controls="hand: left"
+        line="color: yellow; opacity: 0.75"
+        raycaster="objects: .button"
+      ></a-entity>
+
+      <a-entity
+        laser-controls="hand: right"
+        line="color: yellow; opacity: 0.75"
+        raycaster="objects: .button"
+      ></a-entity>
+      <!-- Fin Interaccion con mandos VR. -->
+      
+    </a-scene>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Excavacion 3! • A-Frame</title>
+    <meta name="description" content="Excavacion 3! • A-Frame" />
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+    
+    <script src="components/UI/mylink-redirect.js"></script>
+    
+    <!-- Inicio Template de Botones para cambio de fondo-->
+    <script id="buttonSceneChange" type="text/html">
+      <a-entity class="button"
+          geometry="primitive: plane; height: 1.5; width: 1.5"
+          material="shader: flat; src: ${thumb}; transparent: true"
+          event-set__mouseenter="scale: 1.5 1.5 1.5"
+          event-set__mouseleave="scale: 1 1 1"
+
+          sound="on: click; src: #click-sound"
+
+          position= "${position}"
+
+          mylink-redirect = "href: ${url}"
+
+          text="value: ${title}; height: 7; width: 7; align: center; baseline: bottom"
+        ></a-entity>
+    </script>
+    <!-- Fin Template de Botones para cambio de fondo-->
+    
+  </head>
+  <body>
+    <a-scene background="color: #FAFAFA">
+      <a-assets>
+        <a-asset-item
+          id="excavacion2-obj"
+          src="https://cdn.glitch.com/be558953-ff3a-445c-9099-5f01f06ff4cd%2F3excavacion2_obj.obj?v=1604959182348"
+        ></a-asset-item>
+        <img
+          id="excavacion2-img"
+          src="https://cdn.glitch.com/be558953-ff3a-445c-9099-5f01f06ff4cd%2F3excavacion2_obj.jpg?v=1604977516146"
+        />
+        <img
+          id="maincra-logo"
+          src="https://cdn.glitch.com/1ca489e0-1c30-40d6-9fec-bf5802b74cc4%2FMaincraLogo.jpg?v=1603933163912"
+        />
+        <img
+          id="back-button"
+          src="https://cdn.glitch.com/be558953-ff3a-445c-9099-5f01f06ff4cd%2Fback_button_00.png?v=1605382243346"
+        />
+      </a-assets>
+
+      <a-entity
+        id="Escavacion2"
+        obj-model="obj: #excavacion2-obj"
+        material="src: #excavacion2-img"
+        position="-3 14 -4"
+        rotation="-90 0 0"
+      ></a-entity>
+      
+      <!-- Inicio Botones personalizados desde template -->
+      <a-entity
+        template="src: #buttonSceneChange"
+        data-thumb="#back-button"
+        data-src="#city"
+        data-position="2 1.5 -4"
+        data-title=" \n "
+        data-url="index.html"
+      >
+      </a-entity>
+      <!-- Fin Botones personalizados desde template -->
+      
+      <!-- Inicio Camara principal. -->
+      <!-- <a-entity camera look-controls="pointerLockEnabled: true"> -->
+      <a-entity
+        camera
+        wasd-controls="speed: 100"
+        look-controls="pointerLockEnabled: true"
+      >
+        <!-- Inicio Cursor de la camara principal. -->
+        <a-cursor
+          id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__mouseenter="_event: mouseenter; color: springgreen"
+          event-set__mouseleave="_event: mouseleave; color: black"
+          raycaster="objects: .button"
+        ></a-cursor>
+        <!-- Fin Cursor de la camara principal. -->
+      </a-entity>
+      <!-- Fin Camara principal. -->
+      
+    </a-scene>
+  </body>
+</html>
